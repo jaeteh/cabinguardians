@@ -3,6 +3,7 @@ from enum import Enum, auto
 import time
 from collections import deque
 from typing import Optional
+import numpy as np
 
 '''
 logic notes:
@@ -23,10 +24,21 @@ class State(Enum):
 # consult the sensor datasheets for outputs
 
 # data class for thermal array
+# 8x8 grid array
 @dataclass
 class ThermalReading:
-    ts: float
-    t_avg: float # avg temp across array
+    temp_array = np.array([
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+    ])
+    ts: float = time.time()
+    t_avg: float = np.mean(temp_array) # avg temp across array
     t_max: float # highest temp in array
     hotspot_area: float  # 0..1, percent of image occupied by hottest region
     blob_score: float    # 0..1, percent estimate of how human-like the heat blob is
@@ -309,4 +321,5 @@ if __name__ == "__main__":
         out = d.update(now)
         if i % 10 == 0:
             print(i, out)
+
 
