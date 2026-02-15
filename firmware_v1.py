@@ -213,7 +213,7 @@ class ChildHotCarDetector:
         occ = self._occupant_score(now)
         confidence = clamp(heat * occ)
 
-        # THINK ABOUT THIS AND CHANGE
+        # THINK ABOUT THIS AND CHANGE HOW MUCH TO REDUCE CONF LEVEL BY
         # if too many sensors missing, reduce confidence
         ok_count = sum([thermal_ok, co2_ok, motion_ok])
         if ok_count <= 1:
@@ -309,3 +309,4 @@ if __name__ == "__main__":
         out = d.update(now)
         if i % 10 == 0:
             print(i, out)
+
