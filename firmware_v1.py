@@ -57,13 +57,13 @@ class ThermalReading:
 @dataclass
 class CO2Reading:
     ts: float = time.time()
-    ppm: float # ppm concentration
+    ppm: float = # ppm concentration
     ppm_rate_per_min: float # rate of rise/fall of ppm concentration
 
 # data class for motion sensor
 @dataclass
 class MotionReading:
-    ts: float
+    ts: float = time.time()
     motion: bool # is there motion? T/F
     confidence: float = 1.0  # 0..1 if available
     # starts at 1.0 and changed later by logic
@@ -331,6 +331,7 @@ if __name__ == "__main__":
         out = d.update(now)
         if i % 10 == 0:
             print(i, out)
+
 
 
 
