@@ -6,6 +6,10 @@ from typing import Optional
 import numpy as np
 
 '''
+MAKE SURE YOU INSTALL NUMPY
+'''
+
+'''
 logic notes:
 confidence level: 0..1 indicating how sure the system is that there is a kid
 ts = timestamp
@@ -27,6 +31,7 @@ class State(Enum):
 # 8x8 grid array
 @dataclass
 class ThermalReading:
+    # use AMG88XX library to read data, calibrate, write to array
     temp_array = np.array([
         [],
         [],
@@ -39,14 +44,19 @@ class ThermalReading:
     ])
     ts: float = time.time()
     t_avg: float = np.mean(temp_array) # avg temp across array
-    t_max: float # highest temp in array
-    hotspot_area: float  # 0..1, percent of image occupied by hottest region
+    t_max: float = np.max(temp_array) # highest temp in array
+    hotspot_area: float # 0..1, percent of image occupied by hottest region
+    hotspot_count: float = 0
+    for t in temp_array:
+        if t >= t_max * 0.9: # tune this
+            hotspot_count += 1.0
+    hotspot_area = hotspot_count / 64.0
     blob_score: float    # 0..1, percent estimate of how human-like the heat blob is
 
 # data class for CO2 sensor
 @dataclass
 class CO2Reading:
-    ts: float
+    ts: float = time.time()
     ppm: float # ppm concentration
     ppm_rate_per_min: float # rate of rise/fall of ppm concentration
 
@@ -321,5 +331,6 @@ if __name__ == "__main__":
         out = d.update(now)
         if i % 10 == 0:
             print(i, out)
+
 
 
