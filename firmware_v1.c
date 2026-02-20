@@ -2,6 +2,10 @@
 #include <math.h>
 
 /*
+MAKE SURE YOU INSTALL NUMPY
+*/
+
+/*
 logic notes:
 confidence level: 0..1 indicating how sure the system is that there is a kid
 ts = timestamp
@@ -63,16 +67,13 @@ typedef struct {
 } MotionReading;
 
 typedef struct {
+    /*
+    how to read CAN -> UART -> C for Arduino
+    if the engine is on/off
+    how long has it been since front & rear doors were opened/closed
+    general internal cabin temperature
+    */
 } OBDReading;
-
-@dataclass
-// OBD
-/* class OBDReading:
-    # how to read CAN -> UART -> C for Arduino
-    # if the engine is on/off
-    # how long has it been since front & rear doors were opened/closed
-    # general internal cabin temperature
-*/
 
 // clamping function, makes sure the logic stays between 0 and 1
 static float clampf(float x, float lo = 0.0f, float hi = 1.0f) {
