@@ -388,7 +388,7 @@ private:
   }
 };
 
-// Helper: compute avg/max + hotspot_area similarly to the Python class-side logic (done at ingest time here)
+// helper: compute avg/max + hotspot_area similarly to the python logic (done at ingest time here)
 static void compute_thermal_derived(ThermalReading &r) {
   float sum = 0.0f;
   float mx = -1e9f;
@@ -427,7 +427,7 @@ ChildHotCarDetector d;
 float t0 = 0.0f;
 
 void setup() {
-  Serial.begin(9600); // it should be used with an arduino and serial rate 9600
+  Serial.begin(9600);
   while (!Serial) { /* wait on some boards */ }
 
   t0 = (float)millis() / 1000.0f;
@@ -446,7 +446,7 @@ void loop() {
   ThermalReading tr;
   tr.ts = now;
   tr.blob_score = 0.6f;
-  // Fill temp_array with something plausible; keep the ramp primarily in derived t_avg/t_max via assigned values below.
+  // fill temp_array with something plausible; keep the ramp primarily in derived t_avg/t_max via assigned values below.
   for (int r = 0; r < 8; r++) {
     for (int c = 0; c < 8; c++) {
       tr.temp_array[r][c] = 30.0f + 0.05f * (float)i;
