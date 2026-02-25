@@ -1,9 +1,9 @@
 #include <Arduino.h>
 #include <math.h>
-
-/*
-MAKE SURE YOU INSTALL NUMPY
-*/
+#include <Wire.h>
+#include <Adafruit_AMG88xx.h>
+#include "MHZ19.h"
+#include <ld2410.h>
 
 /*
 logic notes:
