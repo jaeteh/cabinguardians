@@ -5,4 +5,4 @@ TO DO:
 - write more simulations
 
 NOTES
-- the C file is kinda chopped idk how to write C
+- start developing in C - python logic is developed to the extent it can be
